@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/openai.css' %}">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <a href="{% url 'tools' %}" class="home-button">На главную</a>
+        </div>
+    </header>
+
+    <div class="docs-scroll-container" data-important-algolia-crawl="true">
+        <div class="page-body full-width flush docs-page">
+            <div class="anchor-heading-root">
+                <div class="anchor-heading-link">
+                    <div class="icon-item-icon title-icon">
+                        <img src="{{ data.tool.image_url }}" width="24" height="24" alt="{{ data.tool.title }} Icon">
+                    </div>
+                    <h1 class="anchor-heading" data-name="assistant-tools">
+                        <p>{{ data.tool.title }}</p>
+                    </h1>
+
+                </div>
+            </div>
+            <div class="markdown-page markdown-content markdown-prompt-blockquote assistants-tools">
+                <p>Инструментом пользовались {{data.tool.times_used}} раз.</p>
+                <p>{{ data.tool.description_detail }}</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
