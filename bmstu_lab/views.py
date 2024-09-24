@@ -15,7 +15,7 @@ def get_tools(request):
 
     orders_count = len(user_orders)
 
-    return render(request, 'index.html', {'data': {'tools': filtered_tools, 'orders_count': orders_count}})
+    return render(request, 'tools.html', {'data': {'tools': filtered_tools, 'orders_count': orders_count}})
 
 
 def get_orders(request):
