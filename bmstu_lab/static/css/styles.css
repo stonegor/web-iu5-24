@@ -1,0 +1,336 @@
+.mt-6 {
+    margin-top: 1.5rem
+}
+
+@font-face {
+    font-family: Söhne;
+    src: url(https://cdn.openai.com/common/fonts/soehne/soehne-buch.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Söhne;
+    src: url(https://cdn.openai.com/common/fonts/soehne/soehne-halbfett.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap
+}
+
+:root {
+    --gray-0: #fff;
+    --gray-50: #f7f7f8;
+    --gray-100: #ececf1;
+    --gray-900: #202123;
+    --green-100: #e6f3f3;
+    --green-600: #47b881;
+    --grey-600: #7e7e90;
+    --primary: var(--green-600);
+    --primary-700: var(--green-700);
+    --text-primary: var(--gray-900);
+    --text-default: var(--gray-800);
+    --text-secondary: var(--gray-600);
+    --content-v-padding: 14px;
+    --content-h-padding: 224px;
+    --font-size-small: 16px;
+    --sans-serif: "Söhne", helvetica, sans-serif;
+    --card-gradient-hover: linear-gradient(238deg, rgba(255, 255, 255, .5) 0%, rgba(250, 250, 250, 1) 100%);
+}
+
+html,
+body {
+    background-color: var(--gray-0);
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: var(--sans-serif);
+    font-size: var(--font-size-small);
+}
+
+* {
+    scrollbar-width: thin
+}
+
+a {
+    color: var(--grey-600);
+    text-decoration: none;
+    cursor: pointer
+}
+
+a:hover {
+    color: var(--primary)
+}
+
+h1 {
+    line-height: 1.25;
+    font-weight: 500;
+    color: var(--gray-900);
+    font-size: 28px;
+}
+
+.body-large {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px
+}
+
+.body-small {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px
+}
+
+p {
+    line-height: 1.5em
+}
+
+.markdown-content p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.5
+}
+
+.intent {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-900);
+    padding: 10px;
+    height: auto;
+    width: 400px;
+    border-radius: 8px;
+    display: flex;
+    color: var(--text-default);
+    border: 1px solid var(--gray-100);
+    background: var(--card-gradient-hover);
+}
+
+.icon-item {
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: opacity .15s
+}
+
+.icon-item:hover .pointer {
+    opacity: 1;
+    transform: translate(0)
+}
+
+.icon-item:hover .icon-item-icon {
+    color: var(--text-primary);
+    background: var(--card-gradient-hover)
+}
+
+.icon-item-icon {
+    line-height: 0px;
+    font-size: 24px;
+    border-radius: 8px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-default);
+    border: 1px solid var(--gray-100);
+    background: var(--card-gradient-hover);
+    box-sizing: border-box;
+    flex-shrink: 0
+}
+
+.icon-item-right {
+    padding-left: 16px
+}
+
+.icon-item-title {
+    display: flex;
+    color: var(--text-primary);
+    font-weight: 400;
+    align-items: center;
+    transition: color .15s
+}
+
+.pointer {
+    opacity: 0;
+    transform: translate(-4px);
+    display: flex;
+    justify-content: center;
+    transition: opacity .15s ease-in-out, transform .15s ease-in-out
+}
+
+.icon-item-desc {
+    color: var(--text-secondary);
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.anchor-heading-link {
+    padding: 0 var(--content-h-padding);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px
+}
+
+.anchor-heading-link.main {
+    gap: 240px;
+}
+
+
+
+
+.instruction-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.instruction-count-bubble {
+    color: black;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 1.1rem;
+    display: inline-block;
+    text-align: center;
+    min-width: 0px;
+}
+
+
+
+.markdown-page {
+    padding: 0 var(--content-h-padding);
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.markdown-content.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex: 1;
+}
+
+.docs-page {
+    position: relative;
+    min-height: 100%
+}
+
+.docs-page h1 {
+    font-weight: 700
+}
+
+.icon-item {
+    width: 400px;
+    overflow: hidden;
+}
+
+.icon-item-title.body-large,
+.icon-item-desc.body-small {
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+header {
+    background-color: #f5f5f5;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-button {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.instruction-button {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 16px 24px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    background-color: var(--gray-100);
+}
+
+
+.home-button:hover {
+    background-color: #e0e0e0;
+}
+
+.instruction-button:hover {
+    background-color: var(--primary);
+}
+
+.find-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.find-button input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid var(--gray-100);
+    border-radius: 5px;
+    font-family: var(--sans-serif);
+    font-size: var(--font-size-small);
+    width: auto;
+}
+
+.find-button button[type="submit"] {
+    padding: 8px 12px;
+    background-color: var(--gray-100);
+    color: var(--gray-900);
+    border: none;
+    border-radius: 5px;
+    font-family: var(--sans-serif);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.find-button button[type="submit"]:hover {
+    background-color: var(--primary);
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    min-height: 100%;
+    padding-bottom: 60px;
+    /* Adjust this value based on your footer height */
+    box-sizing: border-box;
+}
+
+
+.instruction-icon-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
