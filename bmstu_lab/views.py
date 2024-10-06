@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from bmstu_lab.data import tools_data, orders_data
+from bmstu_lab.data import tools_data, instructions_data, tool_instruction
 from django.http import HttpResponse
 
 
@@ -9,28 +9,31 @@ def get_tools(request):
     filtered_tools = [tool for tool in tools_data
                       if query.lower() in tool['title'].lower()]
 
-    user_id = 1
-    user_orders = next(
-        (cart for cart in orders_data if cart['id'] == user_id), None)
+    id = 1
+    user_instruction = next(
+        (instruction for instruction in instructions_data if instruction['id'] == id), None)
 
-    orders_count = len(user_orders)
+    instructions = [
+        tools_data[tool['tool_id']] for tool in tool_instruction if tool['instruction_id'] == user_instruction['id']
+    ]
 
-    return render(request, 'tools.html', {'data': {'tools': filtered_tools, 'orders_count': orders_count}})
+    instructions_count = len(instructions)
+
+    return render(request, 'tools.html', {'data': {'tools': filtered_tools, 'instructions_count': instructions_count}})
 
 
-def get_orders(request):
+def get_instructions(request, id):
 
-    user_id = 1
-    user_orders = next(
-        (cart for cart in orders_data if cart['id'] == user_id), None)
+    user_instruction = next(
+        (instruction for instruction in instructions_data if instruction['id'] == id), None)
 
-    if not user_orders:
+    if not user_instruction:
         return HttpResponse('Корзина пользователя не найдена', status=404)
 
-    orders = [
-        tool for tool in tools_data if tool['id'] in user_orders['tools']
+    instructions = [
+        tools_data[tool['tool_id']] for tool in tool_instruction if tool['instruction_id'] == user_instruction['id']
     ]
-    return render(request, 'orders.html', {'data': {'orders': orders}})
+    return render(request, 'instruction.html', {'data': {'instructions': instructions, 'intent': user_instructions['intent']}})
 
 
 def get_tool(request, id):

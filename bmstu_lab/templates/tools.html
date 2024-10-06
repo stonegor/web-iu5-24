@@ -11,22 +11,34 @@
     <header>
         <div class="header-content">
             <a href="{% url 'tools' %}" class="home-button">На главную</a>
+
         </div>
     </header>
+
+    <div class="instruction-icon-container">
+        <a href="{% url 'instruction' 1 %}" class="instruction-button">
+            <div class="instruction-count-bubble">{{data.instructions_count}}</div>
+            <img src="http://172.20.0.2:9000/bmstu-lab/right-arrow.png" width="24" height="24">
+        </a>
+    </div>
 
     <div class="docs-scroll-container" data-important-algolia-crawl="true">
         <div class="page-body full-width flush docs-page">
             <div class="anchor-heading-root">
-                <div class="anchor-heading-link">
+                <div class="anchor-heading-link main">
                     <h1 class="anchor-heading" data-name="assistant-tools">
-                        <p>Корзина</p>
+                        <p>Функционал Помощника</p>
                     </h1>
+                    <form method="get" action="{% url 'tools' %}" class="find-button">
+                        <input type="text" name="tool" placeholder="Введите название..." value="{{ request.GET.q }}">
+                        <button type="submit">Поиск</button>
+                    </form>
                 </div>
             </div>
-            <div class="markdown-page markdown-content markdown-prompt-blockquote assistants-tools">
+            <div class="markdown-page markdown-content grid markdown-prompt-blockquote assistants-tools">
 
 
-                {% for tool in data.orders %}
+                {% for tool in data.tools %}
                 <a href="{% url 'tool_url' tool.id %}">
                     <div class="icon-item mt-6 {% if not forloop.last %}mb-8{% endif %}">
                         <div class="icon-item-icon">
@@ -36,8 +48,8 @@
                             <div class="icon-item-title">
                                 <div class="icon-item-title body-large">{{ tool.title }}</div>
                                 <div class="pointer">
-                                    <img src="https://webfor.com/wp-content/uploads/right-chevron-svgrepo-com.svg"
-                                        width="18" height="18" alt="Pointer Icon">
+                                    <img src="http://172.20.0.2:9000/bmstu-lab/arrow.svg" width="18" height="18"
+                                        alt="Pointer Icon">
                                 </div>
                             </div>
                             <div class="icon-item-desc body-small">
@@ -53,6 +65,8 @@
             </div>
         </div>
     </div>
+
+
 
 </body>
 
