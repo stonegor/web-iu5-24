@@ -20,29 +20,36 @@
                 <div class="anchor-heading-link">
                     <h1 class="anchor-heading" data-name="assistant-tools">
                         <p>Запрос</p>
-                        <label class="intent">{{data.intent}}</label>
+
                     </h1>
+                    <form method="post" class="delete-instruction-button"
+                        action="{% url 'delete_instruction' instruction.id %}">
+                        {% csrf_token %}
+                        <button type="submit"> Удалить</button>
+                    </form>
                 </div>
+
             </div>
             <div class="markdown-page markdown-content markdown-prompt-blockquote assistants-tools">
 
-
-                {% for tool in data.instructions %}
-                <a href="{% url 'tool_url' tool.id %}">
+                <label class="intent">{{instruction.intent}}</label>
+                {% for tool_instruction in tools_in_instruction %}
+                <a href="{% url 'tool_url' tool_instruction.tool.id %}">
                     <div class="icon-item mt-6 {% if not forloop.last %}mb-8{% endif %}">
                         <div class="icon-item-icon">
-                            <img src="{{ tool.image_url }}" width="24" height="24" alt="{{ tool.title }} Icon">
+                            <img src="{{ tool_instruction.tool.image_url }}" width="24" height="24"
+                                alt="{{ tool_instruction.tool.title }} Icon">
                         </div>
                         <div class="icon-item-right">
                             <div class="icon-item-title">
-                                <div class="icon-item-title body-large">{{ tool.title }}</div>
+                                <div class="icon-item-title body-large">{{ tool_instruction.tool.title }}</div>
                                 <div class="pointer">
                                     <img src="https://webfor.com/wp-content/uploads/right-chevron-svgrepo-com.svg"
                                         width="18" height="18" alt="Pointer Icon">
                                 </div>
                             </div>
                             <div class="icon-item-desc body-small">
-                                <p>{{ tool.description }}</p>
+                                <p>{{ tool_instruction.tool.description }}</p>
                             </div>
                         </div>
                     </div>
@@ -50,6 +57,7 @@
                 {% empty %}
                 <p>Нет инструментов, соответствующих вашему запросу.</p>
                 {% endfor %}
+
 
             </div>
         </div>

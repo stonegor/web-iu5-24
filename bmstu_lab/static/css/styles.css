@@ -310,8 +310,43 @@ header {
     transition: background-color 0.3s;
 }
 
+
+
 .find-button button[type="submit"]:hover {
     background-color: var(--primary);
+}
+
+.delete-instruction-button button[type="submit"] {
+    padding: 8px 12px;
+    border: 1px solid var(--gray-100);
+    border-radius: 5px;
+    font-family: var(--sans-serif);
+    font-size: var(--font-size-small);
+    margin-left: 10px;
+    transform: translateY(2px);
+    width: auto;
+}
+
+.delete-instruction-button button[type="submit"]:hover {
+    background-color: red;
+    transition: background-color 0.3s;
+}
+
+.add-tool-button button {
+    padding: 0;
+    border: none;
+    background: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--grey-600);
+    margin-left: 63px;
+
+}
+
+.add-tool-button button:hover {
+    color: var(--primary);
+    transition: background-color 0.5s;
 }
 
 html,

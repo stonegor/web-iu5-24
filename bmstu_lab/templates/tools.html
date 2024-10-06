@@ -15,12 +15,14 @@
         </div>
     </header>
 
+    {% if instruction_id%}
     <div class="instruction-icon-container">
-        <a href="{% url 'instruction' 1 %}" class="instruction-button">
-            <div class="instruction-count-bubble">{{data.instructions_count}}</div>
+        <a href="{% url 'instruction' instruction_id %}" class="instruction-button">
+            <div class="instruction-count-bubble">{{instructions_count}}</div>
             <img src="http://172.20.0.2:9000/bmstu-lab/right-arrow.png" width="24" height="24">
         </a>
     </div>
+    {% endif %}
 
     <div class="docs-scroll-container" data-important-algolia-crawl="true">
         <div class="page-body full-width flush docs-page">
@@ -38,26 +40,33 @@
             <div class="markdown-page markdown-content grid markdown-prompt-blockquote assistants-tools">
 
 
-                {% for tool in data.tools %}
-                <a href="{% url 'tool_url' tool.id %}">
-                    <div class="icon-item mt-6 {% if not forloop.last %}mb-8{% endif %}">
-                        <div class="icon-item-icon">
-                            <img src="{{ tool.image_url }}" width="24" height="24" alt="{{ tool.title }} Icon">
-                        </div>
-                        <div class="icon-item-right">
-                            <div class="icon-item-title">
-                                <div class="icon-item-title body-large">{{ tool.title }}</div>
-                                <div class="pointer">
-                                    <img src="http://172.20.0.2:9000/bmstu-lab/arrow.svg" width="18" height="18"
-                                        alt="Pointer Icon">
+                {% for tool in tools %}
+                <div>
+                    <a href="{% url 'tool_url' tool.id %}">
+                        <div class="icon-item mt-6 {% if not forloop.last %}mb-8{% endif %}">
+                            <div class="icon-item-icon">
+                                <img src="{{ tool.image_url }}" width="24" height="24" alt="{{ tool.title }} Icon">
+                            </div>
+                            <div class="icon-item-right">
+                                <div class="icon-item-title">
+                                    <div class="icon-item-title body-large">{{ tool.title }}</div>
+                                    <div class="pointer">
+                                        <img src="http://172.20.0.2:9000/bmstu-lab/arrow.svg" width="18" height="18"
+                                            alt="Pointer Icon">
+                                    </div>
+                                </div>
+                                <div class="icon-item-desc body-small">
+                                    <p>{{ tool.description }}</p>
                                 </div>
                             </div>
-                            <div class="icon-item-desc body-small">
-                                <p>{{ tool.description }}</p>
-                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                    <form method="post" class="add-tool-button" action="{% url 'add_to_instruction' tool.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Добавить в запрос</button>
+                    </form>
+                </div>
+
                 {% empty %}
                 <p>Нет инструментов, соответствующих вашему запросу.</p>
                 {% endfor %}
