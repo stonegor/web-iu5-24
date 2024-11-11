@@ -20,17 +20,14 @@ class InstructionSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
         slug_field='username', queryset=User.objects.all(), allow_null=True
     )
-    tools = serializers.SerializerMethodField(read_only=True, required=False)
+    tools = serializers.SerializerMethodField()
 
     def get_tools(self, instruction):
-        if 'tools' in self.context.get('fields', []):
-            tool_instructions = ToolInstruction.objects.filter(
-                instruction=instruction)
-            tools = [
-                tool_instruction.tool for tool_instruction in tool_instructions]
-            serializer = ToolSerializer(tools, many=True)
-            return serializer.data
-        return None
+        tool_instructions = ToolInstruction.objects.filter(
+            instruction=instruction)
+        tools = [tool_instruction.tool for tool_instruction in tool_instructions]
+        serializer = ToolSerializer(tools, many=True)
+        return serializer.data
 
     class Meta:
         model = Instruction
@@ -39,12 +36,6 @@ class InstructionSerializer(serializers.ModelSerializer):
             'moderator', 'user', 'intent', 'tools'
         ]
         read_only_fields = ['id', 'creation_time']
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        if 'tools' not in self.context.get('fields', []):
-            ret.pop('tools', None)
-        return ret
 
 
 class ToolInstructionSerializer(serializers.ModelSerializer):
